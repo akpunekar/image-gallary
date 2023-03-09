@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import photoService from "./photoService";
 
+/* Setting the initial state of the reducer. */
 const initialState = {
   photos: [],
   isError: false,
@@ -68,6 +69,7 @@ export const deletePhoto = createAsyncThunk(
   }
 );
 
+/* Creating a slice of the redux store. */
 export const photoSlice = createSlice({
   name: "photo",
   initialState,

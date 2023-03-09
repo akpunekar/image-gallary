@@ -1,3 +1,4 @@
+/* Creating a schema for the photos collection. */
 const mongoose = require("mongoose");
 
 const PHOTOS_DB = mongoose.createConnection(process.env.MONGODB_URI_PHOTOS);

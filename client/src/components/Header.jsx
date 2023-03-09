@@ -6,8 +6,14 @@ import { logout, reset } from "../features/auth/authSlice";
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  /* Destructuring the user from the state.auth. */
   const { user } = useSelector((state) => state.auth);
 
+  /**
+   * When the user clicks the logout button, the user is logged out, the state is reset, and the user
+   * is redirected to the home page.
+   */
   const onLogout = () => {
     dispatch(logout());
     dispatch(reset());

@@ -6,7 +6,9 @@ import React from "react";
 function PhotoItem({ photo }) {
   const dispatch = useDispatch();
 
+  /* A function that is being called when the user clicks the download button. */
   const downloadImage = (url) => {
+    /* Downloading the image. */
     fetch(url)
       .then((response) => response.blob())
       .then((blob) => {
@@ -21,6 +23,7 @@ function PhotoItem({ photo }) {
       })
       .catch((error) => console.error(error));
   };
+
   return (
     <Card style={{ width: "18rem", margin: "5px" }}>
       <Card.Img style={{ width: "19rem" }} variant="top" src={photo.photoUrl} />

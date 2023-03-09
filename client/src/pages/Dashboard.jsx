@@ -12,6 +12,8 @@ function Dashboard() {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.auth);
+
+  /* Destructuring the state of the photos reducer. */
   const { photos, isLoading, isError, message } = useSelector(
     (state) => state.photos
   );
@@ -24,12 +26,16 @@ function Dashboard() {
       navigate("/login");
     }
 
+    /* Dispatching the getPhotos action to the reducer. */
     dispatch(getPhotos());
+
+    /* A clean up function. It is called when the component is unmounted. */
     return () => {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
 
+  /* Checking if the isLoading state is true. If it is true, it will return the Spinner component. */
   if (isLoading) {
     return <Spinner />;
   }

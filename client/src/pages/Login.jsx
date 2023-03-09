@@ -12,11 +12,13 @@ function Login() {
     password: "",
   });
 
+  /* Destructuring the formData object. */
   const { username, password } = formData;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  /* Destructuring the state object. */
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
@@ -34,6 +36,7 @@ function Login() {
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
+    /* A function that takes in a previous state and returns a new state. */
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -43,11 +46,13 @@ function Login() {
   const onSubmit = (e) => {
     e.preventDefault();
 
+    /* Destructuring the formData object. */
     const userData = {
       username,
       password,
     };
 
+    /* Dispatching the login action with the userData object as the payload. */
     dispatch(login(userData));
   };
 

@@ -13,16 +13,19 @@ function Register() {
     confirmPassword: "",
   });
 
+  /* Destructuring the formData object. */
   const { username, password, confirmPassword } = formData;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  /* Destructuring the state object. */
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
 
   useEffect(() => {
+    /* Checking if there is an error and if there is, it will display a toast message. */
     if (isError) {
       toast.error("User Exist or " + message);
     }
@@ -33,6 +36,7 @@ function Register() {
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
+    /* A function that is used to update the state of the formData object. */
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -41,6 +45,10 @@ function Register() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    /* Checking if the password and confirmPassword are the same. If they are not, it will display a
+    toast message. If they are the same, it will create a userData object and dispatch the register
+    action. */
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
     } else {
@@ -52,6 +60,7 @@ function Register() {
     }
   };
 
+  /* Checking if the isLoading state is true. If it is, it will display a spinner. */
   if (isLoading) {
     return <Spinner />;
   }

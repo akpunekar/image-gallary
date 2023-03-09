@@ -9,6 +9,7 @@ function PhotoForm() {
   const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
 
+  /* A function that is called when the form is submitted. */
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -17,6 +18,7 @@ function PhotoForm() {
     setPhotoUrl("");
   };
 
+  /* A function that is called when the user selects a photo. */
   const getPhotoUrl = (pics) => {
     if (pics.type === "image/jpeg" || pics.type === "image/png") {
       setVisible(true);

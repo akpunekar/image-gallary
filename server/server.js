@@ -9,6 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+/* This is how you set up routes. The first argument is the path, and the second argument is the route. */
 app.use("/users", userRoutes);
 app.use("/photos", photoRoutes);
 

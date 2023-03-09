@@ -12,6 +12,7 @@ function App() {
       <Router>
         <div className="container">
           <Header />
+          {/* A component that is used to render the components based on the path. */}
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
@@ -19,6 +20,8 @@ function App() {
           </Routes>
         </div>
       </Router>
+
+      {/* A component that is used to display notifications. */}
       <ToastContainer />
     </>
   );
