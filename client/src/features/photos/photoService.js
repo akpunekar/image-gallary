@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "/photos/";
+const API_URL = "http://localhost:5000/photos/";
 
 // Upload new photo
 const createPhoto = async (photoData, token) => {
