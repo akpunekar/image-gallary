@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/photos/";
+const API_URL = "https://image-gallary-ldk5.onrender.com/photos/";
 
 // Upload new photo
 const createPhoto = async (photoData, token) => {

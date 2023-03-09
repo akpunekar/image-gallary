@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "http://localhost:5000/users/";
+const API_URL = "https://image-gallary-ldk5.onrender.com/users/";
 
 // Register user
 const register = async (userData) => {
