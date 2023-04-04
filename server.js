@@ -4,9 +4,32 @@ const cors = require("cors");
 const path = require("path");
 const userRoutes = require("./routes/userRoutes");
 const photoRoutes = require("./routes/photoRoutes");
+const mongoose = require("mongoose");
 
 const app = express();
-exports.app = app;
+const port = process.env.SERVER_PORT || 5000;
+const USERS_DB = mongoose.createConnection(
+  process.env.MONGODB_URI_USERS,
+  (err) => {
+    console.log("Connected to DB");
+    if (err) {
+      console.error(err);
+      return false;
+    }
+    app.listen(port, () => {
+      console.log("listening on port " + port);
+    });
+  }
+);
+const userSchema = mongoose.Schema(
+  {
+    username: { type: String, required: true },
+    password: { type: String, required: true },
+  },
+  { timestamps: true }
+);
+const User = USERS_DB.model("User", userSchema);
+module.exports = User;
 
 app.use(cors());
 app.use(express.json());
@@ -20,5 +43,3 @@ app.use(express.static(path.join(__dirname, "./client/build")));
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
-
-module.exports = Photo;
