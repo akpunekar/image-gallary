@@ -2,12 +2,15 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createPhoto } from "../features/photos/photoSlice";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 function PhotoForm() {
   const [photoName, setPhotoName] = useState("");
   const [photoUrl, setPhotoUrl] = useState("");
   const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
+
+  const { uniqueDigit } = useSelector((state) => state.photos);
 
   /* A function that is called when the form is submitted. */
   const onSubmit = (e) => {
@@ -36,6 +39,7 @@ function PhotoForm() {
         .then((data) => {
           setVisible(false);
           setPhotoUrl(data.url.toString());
+          toast(`Unique code is ${uniqueDigit} to download uploaded photo`);
         })
         .catch((err) => toast.error(err));
     } else {

@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { deletePhoto } from "../features/photos/photoSlice";
 import { Card, Button } from "react-bootstrap";
+import { toast } from "react-toastify";
 import React from "react";
 
 function PhotoItem({ photo }) {
