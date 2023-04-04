@@ -16,6 +16,7 @@ function PhotoForm() {
       return toast.error("Please enter a name for the photo.");
     }
     dispatch(createPhoto({ photoName, photoUrl }));
+    toast(`Photo Uploaded!!`);
     setPhotoName("");
     setPhotoUrl("");
   };
@@ -36,7 +37,6 @@ function PhotoForm() {
         .then((data) => {
           setVisible(false);
           setPhotoUrl(data.url.toString());
-          toast(`Photo Uploaded!!`);
         })
         .catch((err) => toast.error(err));
     } else {
