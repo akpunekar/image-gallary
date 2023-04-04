@@ -6,6 +6,7 @@ const userRoutes = require("./routes/userRoutes");
 const photoRoutes = require("./routes/photoRoutes");
 
 const app = express();
+exports.app = app;
 
 app.use(cors());
 app.use(express.json());
@@ -20,8 +21,4 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-const port = process.env.SERVER_PORT || 5000;
-
-app.listen(port, () => {
-  console.log("listening on port " + port);
-});
+module.exports = Photo;

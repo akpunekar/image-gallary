@@ -1,6 +1,15 @@
-/* This is creating a connection to the database and creating a schema for the database. */
 const mongoose = require("mongoose");
-const USERS_DB = mongoose.createConnection(process.env.MONGODB_URI_USERS);
+const { app } = require("./server");
+
+const port = process.env.SERVER_PORT || 5000;
+const USERS_DB = mongoose
+  .createConnection(process.env.MONGODB_URI_USERS)
+  .then((err) => {
+    console.log(err);
+    app.listen(port, () => {
+      console.log("listening on port " + port);
+    });
+  });
 const userSchema = mongoose.Schema(
   {
     username: { type: String, required: true },
@@ -8,7 +17,5 @@ const userSchema = mongoose.Schema(
   },
   { timestamps: true }
 );
-
 const User = USERS_DB.model("User", userSchema);
-
 module.exports = User;
