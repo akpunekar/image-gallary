@@ -10,8 +10,20 @@ const app = express();
 const port = process.env.SERVER_PORT || 5000;
 const USERS_DB = mongoose.createConnection(
   process.env.MONGODB_URI_USERS,
-  (err) => {
-    const PHOTOS_DB = mongoose.createConnection(process.env.MONGODB_URI_PHOTOS);
+  () => {
+    const PHOTOS_DB = mongoose.createConnection(
+      process.env.MONGODB_URI_PHOTOS,
+      (err) => {
+        console.log("Connected to DB");
+        if (err) {
+          console.error(err);
+          return false;
+        }
+        app.listen(port, () => {
+          console.log("listening on port " + port);
+        });
+      }
+    );
     const photoSchema = mongoose.Schema(
       {
         photoName: { type: String, required: true },
@@ -27,15 +39,6 @@ const USERS_DB = mongoose.createConnection(
     );
     const Photo = PHOTOS_DB.model("Photo", photoSchema);
     module.exports = Photo;
-
-    console.log("Connected to DB");
-    if (err) {
-      console.error(err);
-      return false;
-    }
-    app.listen(port, () => {
-      console.log("listening on port " + port);
-    });
   }
 );
 const userSchema = mongoose.Schema(
@@ -45,6 +48,7 @@ const userSchema = mongoose.Schema(
   },
   { timestamps: true }
 );
+
 const User = USERS_DB.model("User", userSchema);
 module.exports = User;
 
