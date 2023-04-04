@@ -4,11 +4,21 @@ const cors = require("cors");
 const path = require("path");
 const userRoutes = require("./routes/userRoutes");
 const photoRoutes = require("./routes/photoRoutes");
-const connectDb = require("./config/connectDB");
+const mongoose = require("mongoose");
 
-connectDb();
-const app = express();
 const port = process.env.SERVER_PORT || 5000;
+const app = express();
+
+mongoose.connect(process.env.MONGODB_URI, (err) => {
+  if (err) {
+    console.log(err);
+  }
+  console.log(`Server Running On ${mongoose.connection.host}`);
+
+  app.listen(port, () => {
+    console.log("listening on port " + port);
+  });
+});
 
 app.use(cors());
 app.use(express.json());
@@ -21,8 +31,4 @@ app.use(express.static(path.join(__dirname, "./client/build")));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
-
-app.listen(port, () => {
-  console.log("listening on port " + port);
 });

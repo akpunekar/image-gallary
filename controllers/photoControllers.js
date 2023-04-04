@@ -1,4 +1,4 @@
-const Photo = require("../server");
+const Photo = require("../models/photosModel");
 
 const asyncHandler = require("express-async-handler");
 
